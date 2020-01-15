@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OCR, OCRSourceType } from '@ionic-native/ocr/ngx';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private ocr: OCR) { }
+
+  decode() {
+    this.ocr.recText(OCRSourceType.NORMFILEURL, 'assets/testocr.png')
+        .then((res) => console.log(JSON.stringify(res)))
+        .catch((error: any) => console.error(error));
+  }
 
 }
